@@ -9,13 +9,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * @author Adam Stelmaszczyk
@@ -41,7 +36,6 @@ public class GetTask extends AsyncTask<String, Void, String> {
         }
         Log.d("test", "response: " + response);
         Gson gson = new Gson();
-        ResponseModel responseModel = gson.fromJson(response, ResponseModel.class);
-        System.out.println("responseModel: " + responseModel);
+        User user = gson.fromJson(response, User.class);
     }
 }
