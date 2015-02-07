@@ -29,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
 //        Log.d("test", "nextAlarm:" + nextAlarm);
 
         new GetTask().execute("http://178.62.45.23/get/1");
+        new PostTask(new InputModel(0)).execute("http://178.62.45.23/input/1");
     }
 
 

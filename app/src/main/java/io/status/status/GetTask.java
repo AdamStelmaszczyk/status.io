@@ -32,40 +32,16 @@ public class GetTask extends AsyncTask<String, Void, String> {
             e.printStackTrace();
             return null;
         }
-        InputStream inputStream;
-        try {
-            inputStream = response.getEntity().getContent();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        try {
-            return convertInputStreamToString(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return Utils.responseToString(response);
     }
 
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            result += line;
-        }
-        inputStream.close();
-        return result;
-    }
-
-
-    protected void onPostExecute(String result) {
-        if (result == null) {
+    protected void onPostExecute(String response) {
+        if (response == null) {
             return;
         }
-        Log.d("test", "result: " + result);
+        Log.d("test", "response: " + response);
         Gson gson = new Gson();
-        ResponseModel responseModel = gson.fromJson(result, ResponseModel.class);
+        ResponseModel responseModel = gson.fromJson(response, ResponseModel.class);
         System.out.println("responseModel: " + responseModel);
     }
 }
