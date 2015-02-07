@@ -63,9 +63,8 @@ public class GetTask extends AsyncTask<String, Void, String> {
         if (result == null) {
             return;
         }
-        Log.d("test", "result: " + result);
+
         Gson gson = new Gson();
-        ResponseModel responseModel = gson.fromJson(result, ResponseModel.class);
-        System.out.println("responseModel: " + responseModel);
+        User user = gson.fromJson(result, User.class);
     }
 }
