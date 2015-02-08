@@ -1,4 +1,6 @@
-package io.status.status;
+package io.status.status.task;
+
+import android.os.AsyncTask;
 
 import org.apache.http.HttpResponse;
 
@@ -10,9 +12,9 @@ import java.io.InputStreamReader;
 /**
  * @author Adam Stelmaszczyk
  */
-public class Utils {
+abstract public class BaseTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> {
 
-    public static String responseToString(HttpResponse httpResponse) {
+    protected static String responseToString(HttpResponse httpResponse) {
         InputStream inputStream;
         try {
             inputStream = httpResponse.getEntity().getContent();
@@ -38,4 +40,5 @@ public class Utils {
         inputStream.close();
         return result;
     }
+
 }

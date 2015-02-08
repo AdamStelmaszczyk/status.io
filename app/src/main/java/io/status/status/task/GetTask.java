@@ -1,6 +1,5 @@
 package io.status.status.task;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,17 +10,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
-import io.status.status.MainActivity;
 import io.status.status.UserListAdapter;
-import io.status.status.Utils;
 import io.status.status.model.UserModel;
 
 /**
  * @author Adam Stelmaszczyk
  */
-public class GetTask extends AsyncTask<String, Void, String> {
+public class GetTask extends BaseTask<String, Void, String> {
     UserListAdapter userListAdapter;
 
     public GetTask(UserListAdapter userListAdapter) {
@@ -38,7 +34,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
             e.printStackTrace();
             return null;
         }
-        return Utils.responseToString(response);
+        return responseToString(response);
     }
 
     protected void onPostExecute(String response) {

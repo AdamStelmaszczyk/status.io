@@ -1,6 +1,5 @@
 package io.status.status.task;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.apache.http.HttpResponse;
@@ -11,13 +10,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 
-import io.status.status.Utils;
 import io.status.status.model.InputModel;
 
 /**
  * @author Adam Stelmaszczyk
  */
-public class PostTask extends AsyncTask<String, Void, String> {
+public class PostTask extends BaseTask<String, Void, String> {
 
     private InputModel inputModel;
 
@@ -38,7 +36,7 @@ public class PostTask extends AsyncTask<String, Void, String> {
             e.printStackTrace();
             return null;
         }
-        return Utils.responseToString(response);
+        return responseToString(response);
     }
 
     @Override
