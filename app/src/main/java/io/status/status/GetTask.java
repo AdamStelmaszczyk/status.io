@@ -34,7 +34,7 @@ public class GetTask extends AsyncTask<String, Void, String> {
         if (response == null) {
             return;
         }
-        Log.d("test", "response: " + response);
+        Log.d("test", "GET response: " + response);
         Gson gson = new Gson();
         User user = gson.fromJson(response, User.class);
     }
