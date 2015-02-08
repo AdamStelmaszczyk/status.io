@@ -18,12 +18,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Repeater.mainActivity = this;
 
         setContentView(R.layout.activity_main);
 
         this.listView = (ListView) findViewById(R.id.listView);
-
-        Repeater.mainActivity = this;
     }
 
     @Override
