@@ -24,7 +24,7 @@ public class Repeater extends IntentService {
     /**
      * Repetition delay in ms.
      */
-    private static final int DELAY = 3000;
+    private static final int DELAY = 1000;
     private static final int INTENT_REQUEST_CODE = 666;
     private static final String BASE_URL = "http://178.62.45.23/";
 
