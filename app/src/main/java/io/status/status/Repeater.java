@@ -34,20 +34,12 @@ public class Repeater extends IntentService {
         Log.d("test", "Repeater.doAfterDelay");
 
         // do your thing - GET and POST request
-<<<<<<< HEAD
         if (mainActivity != null) {
             new GetTask(mainActivity).execute("http://178.62.45.23/get/3");
         }
 
         InputModel inputModel = new InputModel(0, 0, 0, "");
         new PostTask(inputModel).execute("http://178.62.45.23/input/1");
-=======
-        if (mainActivity != null)
-            new GetTask(mainActivity).execute("http://178.62.45.23/get/3");
-
-        InputModel inputModel = new InputModel(0);
-        new PostTask(inputModel).execute("http://178.62.45.23/input/2");
->>>>>>> 17e2b62af5e02d3911928b024aa89a63ed715636
 
         // schedule next
         getAlarmManager(context).set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + DELAY,
