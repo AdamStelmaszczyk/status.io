@@ -16,11 +16,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 /**
  * @author Adam Stelmaszczyk
  */
 public class GetTask extends AsyncTask<String, Void, String> {
+    MainActivity caller;
+
+    GetTask(MainActivity caller){
+        this.caller = caller;
+    }
 
     protected String doInBackground(String... urls) {
         HttpClient client = new DefaultHttpClient();
@@ -66,5 +72,12 @@ public class GetTask extends AsyncTask<String, Void, String> {
 
         Gson gson = new Gson();
         User user = gson.fromJson(result, User.class);
+
+        LinkedList<String> users = new LinkedList<String>();
+        for (User u : user.friends) {
+            users.push(u.name);
+        }
+
+        this.caller.setupList(users);
     }
 }
