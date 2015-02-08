@@ -31,12 +31,14 @@ public class UserListAdapter extends ArrayAdapter {
         View rowView = inflater.inflate(R.layout.row_layout, parent, false);
 
         TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView statusView = (TextView) rowView.findViewById(R.id.status);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         ImageView avatarView = (ImageView) rowView.findViewById(R.id.avatar);
 
         UserModel user = users.get(position);
 
         textView.setText(user.name);
+
 
         if (user.name.equals("Larry Page")){
             avatarView.setImageResource(R.drawable.larry);
@@ -46,15 +48,22 @@ public class UserListAdapter extends ArrayAdapter {
             avatarView.setImageResource(R.drawable.mayer);
         }
 
+        String statusText;
+
         // Change the icon for Windows and iPhone
         if (user.status == 1) {
             imageView.setImageResource(R.drawable.ic_action_emo_cool);
+            statusText = "Available for " + Integer.toString(user.status_time) + "m...";
         } else if (user.status == 3) {
             imageView.setImageResource(R.drawable.ic_action_emo_shame);
+            statusText = "Try again in " + Integer.toString(user.status_time) + "m...";
         } else {
             imageView.setImageResource(R.drawable.ic_action_emo_err);
+            statusText = "Try again in " + Integer.toString(user.status_time) + "m...";
             // Unknown User Status
         }
+
+        statusView.setText(statusText);
 
         return rowView;
     }

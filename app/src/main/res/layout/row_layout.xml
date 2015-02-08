@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Try again in 15m..."
-            android:id="@+id/textView"
+            android:id="@+id/status"
             android:layout_row="0"
             android:layout_column="1"
             android:textSize="15dp"
