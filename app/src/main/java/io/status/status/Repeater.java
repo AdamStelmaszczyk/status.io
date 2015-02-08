@@ -18,7 +18,7 @@ import io.status.status.task.PostTask;
  */
 public class Repeater extends IntentService {
 
-    static ArrayAdapter userListAdapter;
+    static UserListAdapter userListAdapter;
 
     public static int userId = 1;
     /**

@@ -2,7 +2,6 @@ package io.status.status.task;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
@@ -15,6 +14,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import io.status.status.MainActivity;
+import io.status.status.UserListAdapter;
 import io.status.status.Utils;
 import io.status.status.model.UserModel;
 
@@ -22,9 +22,9 @@ import io.status.status.model.UserModel;
  * @author Adam Stelmaszczyk
  */
 public class GetTask extends AsyncTask<String, Void, String> {
-    ArrayAdapter userListAdapter;
+    UserListAdapter userListAdapter;
 
-    public GetTask(ArrayAdapter userListAdapter) {
+    public GetTask(UserListAdapter userListAdapter) {
         this.userListAdapter = userListAdapter;
     }
 
@@ -50,13 +50,8 @@ public class GetTask extends AsyncTask<String, Void, String> {
         Gson gson = new Gson();
         UserModel user = gson.fromJson(response, UserModel.class);
 
-        this.userListAdapter.clear();
-
-        LinkedList<String> users = new LinkedList<>();
-        for (UserModel u : user.friends) {
-            this.userListAdapter.add(u.name);
-        }
-
+        userListAdapter.clear();
+        userListAdapter.addAll(user.friends);
         userListAdapter.notifyDataSetChanged();
     }
 }

@@ -9,13 +9,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import io.status.status.model.UserModel;
+
 /**
  * @author Adam Stelmaszczyk
  */
 public class MainActivity extends ActionBarActivity {
 
     private ListView listView;
-    private ArrayAdapter<String> userListAdapter;
+    private UserListAdapter userListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +27,10 @@ public class MainActivity extends ActionBarActivity {
 
         this.listView = (ListView) findViewById(R.id.listView);
 
-        ArrayList<String> users = new ArrayList<String>();
-        this.userListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, users);
+        ArrayList<UserModel> users = new ArrayList<>();
+        this.userListAdapter = new UserListAdapter(this, users);
         this.listView.setAdapter(this.userListAdapter);
         Repeater.userListAdapter = this.userListAdapter;
-
     }
 
     @Override
