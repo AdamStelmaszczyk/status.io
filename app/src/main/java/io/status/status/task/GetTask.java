@@ -23,7 +23,7 @@ import io.status.status.model.UserModel;
 public class GetTask extends AsyncTask<String, Void, String> {
     MainActivity caller;
 
-    GetTask(MainActivity caller) {
+    public GetTask(MainActivity caller) {
         this.caller = caller;
     }
 

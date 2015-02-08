@@ -21,7 +21,7 @@ public class PostTask extends AsyncTask<String, Void, String> {
 
     private InputModel inputModel;
 
-    PostTask(InputModel inputModel) {
+    public PostTask(InputModel inputModel) {
         this.inputModel = inputModel;
     }
 

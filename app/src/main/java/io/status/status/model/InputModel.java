@@ -3,7 +3,9 @@ package io.status.status.model;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.provider.Settings;
+import android.util.Log;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -21,9 +23,9 @@ public class InputModel {
     public int onCall;
     public String nextAlarm;
 
-    InputModel(Context context) {
+    public InputModel(Context context) {
         this.accelerometer = initAccelerometer(context);
-        this.silent = initSilent();
+        this.silent = initSilent(context);
         this.onCall = initOnCall();
         this.nextAlarm = initNextAlarm(context);
     }
@@ -35,10 +37,12 @@ public class InputModel {
         return 0;
     }
 
-
-
-    private int initSilent() {
-        return 0;
+    private int initSilent(Context context) {
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        int ringerMode = am.getRingerMode();
+        int silent = (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) ? 1 : 0;
+        Log.d("test", "silent: " + silent);
+        return silent;
     }
 
     private int initOnCall() {
@@ -46,7 +50,9 @@ public class InputModel {
     }
 
     private String initNextAlarm(Context context) {
-        return Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
+        String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
+        Log.d("test", "nextAlarm: " + nextAlarm);
+        return nextAlarm;
     }
 
     public List<? extends NameValuePair> getNameValuePairs() {
