@@ -1,8 +1,6 @@
 package io.status.status.model;
 
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.provider.Settings;
 import android.util.Log;
@@ -12,6 +10,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.status.status.Acceleration;
 
 /**
  * @author Adam Stelmaszczyk
@@ -31,10 +31,10 @@ public class InputModel {
     }
 
     private int initAccelerometer(Context context) {
-        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
-        return 0;
+        Acceleration acceleration = new Acceleration(context);
+        int accelerometer = acceleration.isAccelerating();
+        Log.d("test", "accelerometer: " + accelerometer);
+        return accelerometer;
     }
 
     private int initSilent(Context context) {
@@ -63,5 +63,4 @@ public class InputModel {
         nameValuePairs.add(new BasicNameValuePair("nextAlarm", nextAlarm + ""));
         return nameValuePairs;
     }
-
 }
