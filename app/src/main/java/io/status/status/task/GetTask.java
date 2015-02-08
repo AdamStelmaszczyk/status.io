@@ -2,6 +2,7 @@ package io.status.status.task;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import com.google.gson.Gson;
 
@@ -21,10 +22,10 @@ import io.status.status.model.UserModel;
  * @author Adam Stelmaszczyk
  */
 public class GetTask extends AsyncTask<String, Void, String> {
-    MainActivity caller;
+    ArrayAdapter userListAdapter;
 
-    public GetTask(MainActivity caller) {
-        this.caller = caller;
+    public GetTask(ArrayAdapter userListAdapter) {
+        this.userListAdapter = userListAdapter;
     }
 
     protected String doInBackground(String... urls) {
@@ -49,11 +50,13 @@ public class GetTask extends AsyncTask<String, Void, String> {
         Gson gson = new Gson();
         UserModel user = gson.fromJson(response, UserModel.class);
 
+        this.userListAdapter.clear();
+
         LinkedList<String> users = new LinkedList<>();
         for (UserModel u : user.friends) {
-            users.push(u.name);
+            this.userListAdapter.add(u.name);
         }
 
-        caller.setupList(users);
+        userListAdapter.notifyDataSetChanged();
     }
 }

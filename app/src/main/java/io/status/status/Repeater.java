@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import io.status.status.model.InputModel;
 import io.status.status.task.GetTask;
@@ -17,7 +18,7 @@ import io.status.status.task.PostTask;
  */
 public class Repeater extends IntentService {
 
-    static MainActivity mainActivity;
+    static ArrayAdapter userListAdapter;
 
     public static int userId = 1;
     /**
@@ -25,7 +26,7 @@ public class Repeater extends IntentService {
      */
     private static final int DELAY = 3000;
     private static final int INTENT_REQUEST_CODE = 666;
-    private static final String BASE_URL = "http://178.62.45.23:5001/";
+    private static final String BASE_URL = "http://178.62.45.23/";
 
     public Repeater() {
         super("String name");
@@ -40,8 +41,8 @@ public class Repeater extends IntentService {
         Log.d("test", "Repeater.doAfterDelay");
 
         // do your thing - GET and POST request
-        if (mainActivity != null) {
-            new GetTask(mainActivity).execute(BASE_URL + "get/" + userId);
+        if (userListAdapter != null) {
+            new GetTask(userListAdapter).execute(BASE_URL + "get/" + userId);
         }
 
         InputModel inputModel = new InputModel(context);

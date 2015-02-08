@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -14,15 +15,21 @@ import java.util.LinkedList;
 public class MainActivity extends ActionBarActivity {
 
     private ListView listView;
+    private ArrayAdapter userListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Repeater.mainActivity = this;
 
         setContentView(R.layout.activity_main);
 
         this.listView = (ListView) findViewById(R.id.listView);
+
+        ArrayList<String> users = new ArrayList<String>();
+        this.userListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, users);
+        this.listView.setAdapter(this.userListAdapter);
+        Repeater.userListAdapter = this.userListAdapter;
+
     }
 
     @Override
@@ -40,8 +47,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
-    public void setupList(LinkedList<String> users) {
-        ArrayAdapter userListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, users.toArray());
-        listView.setAdapter(userListAdapter);
+    public void setupList(ArrayList<String> users) {
     }
 }
