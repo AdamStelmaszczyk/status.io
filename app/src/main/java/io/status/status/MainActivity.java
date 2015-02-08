@@ -26,7 +26,9 @@ public class MainActivity extends ActionBarActivity {
                 Settings.System.NEXT_ALARM_FORMATTED);
 //       Log.d("test", "nextAlarm:" + nextAlarm);
 
-        new GetTask(this).execute("http://178.62.45.23/get/2");
+        new GetTask(this).execute("http://178.62.45.23/get/1");
+
+        Repeater.mainActivity = this;
     }
 
     public void setupList(LinkedList<String> users){

@@ -13,6 +13,8 @@ import android.util.Log;
  */
 public class Repeater extends IntentService {
 
+    static MainActivity mainActivity;
+
     /**
      * Repetition delay in ms.
      */
@@ -32,10 +34,11 @@ public class Repeater extends IntentService {
         Log.d("test", "Repeater.doAfterDelay");
 
         // do your thing - GET and POST request
-        new GetTask().execute("http://178.62.45.23/get/1");
+        if (mainActivity != null)
+            new GetTask(mainActivity).execute("http://178.62.45.23/get/3");
 
         InputModel inputModel = new InputModel(0);
-        new PostTask(inputModel).execute("http://178.62.45.23/input/1");
+        new PostTask(inputModel).execute("http://178.62.45.23/input/2");
 
         // schedule next
         getAlarmManager(context).set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + DELAY,
