@@ -1,22 +1,22 @@
-package io.status.status;
+package io.status.status.model;
 
 import java.util.List;
 
 /**
  * Created by hirish on 2/7/15.
  */
-public class User {
+public class UserModel {
     public int id;
     public String name;
-    public List<User> friends;
+    public List<UserModel> friends;
 
-    private User(int id, String name, List<User> friends){
+    private UserModel(int id, String name, List<UserModel> friends) {
         this.id = id;
         this.name = name;
         this.friends = friends;
     }
 
-    User(int id, String name){
+    UserModel(int id, String name) {
         this.id = id;
         this.name = name;
         this.friends = null;

@@ -1,6 +1,7 @@
-package io.status.status;
+package io.status.status.task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -11,6 +12,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.util.LinkedList;
+
+import io.status.status.MainActivity;
+import io.status.status.Utils;
+import io.status.status.model.UserModel;
 
 /**
  * @author Adam Stelmaszczyk
@@ -40,11 +45,12 @@ public class GetTask extends AsyncTask<String, Void, String> {
             return;
         }
 
+        Log.d("test", "GET response: " + response);
         Gson gson = new Gson();
-        User user = gson.fromJson(response, User.class);
+        UserModel user = gson.fromJson(response, UserModel.class);
 
         LinkedList<String> users = new LinkedList<>();
-        for (User u : user.friends) {
+        for (UserModel u : user.friends) {
             users.push(u.name);
         }
 

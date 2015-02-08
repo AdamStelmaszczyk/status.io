@@ -6,8 +6,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.util.Log;
+
+import io.status.status.model.InputModel;
+import io.status.status.task.GetTask;
+import io.status.status.task.PostTask;
 
 /**
  * @author Adam Stelmaszczyk
@@ -41,9 +44,7 @@ public class Repeater extends IntentService {
             new GetTask(mainActivity).execute(BASE_URL + "get/" + userId);
         }
 
-        String nextAlarm = Settings.System.getString(context.getContentResolver(),
-                Settings.System.NEXT_ALARM_FORMATTED);
-        InputModel inputModel = new InputModel(0, 0, 0, nextAlarm);
+        InputModel inputModel = new InputModel(context);
         new PostTask(inputModel).execute(BASE_URL + "post/" + userId);
 
         // schedule next
