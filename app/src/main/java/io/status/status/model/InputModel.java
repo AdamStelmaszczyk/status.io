@@ -3,7 +3,6 @@ package io.status.status.model;
 import android.content.Context;
 import android.media.AudioManager;
 import android.provider.Settings;
-import android.util.Log;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,33 +25,28 @@ public class InputModel {
     public InputModel(Context context) {
         this.accelerometer = initAccelerometer(context);
         this.silent = initSilent(context);
-        this.onCall = initOnCall();
+        this.onCall = initOnCall(context);
         this.nextAlarm = initNextAlarm(context);
     }
 
     private int initAccelerometer(Context context) {
         Acceleration acceleration = new Acceleration(context);
-        int accelerometer = acceleration.isAccelerating();
-        Log.d("test", "accelerometer: " + accelerometer);
-        return accelerometer;
+        return acceleration.isAccelerating();
     }
 
     private int initSilent(Context context) {
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         int ringerMode = am.getRingerMode();
-        int silent = (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) ? 1 : 0;
-        Log.d("test", "silent: " + silent);
-        return silent;
+        return (ringerMode == AudioManager.RINGER_MODE_SILENT || ringerMode == AudioManager.RINGER_MODE_VIBRATE) ? 1 : 0;
     }
 
-    private int initOnCall() {
-        return 0;
+    private int initOnCall(Context context) {
+        AudioManager manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        return (manager.getMode() == AudioManager.MODE_IN_CALL) ? 1 : 0;
     }
 
     private String initNextAlarm(Context context) {
-        String nextAlarm = Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
-        Log.d("test", "nextAlarm: " + nextAlarm);
-        return nextAlarm;
+        return Settings.System.getString(context.getContentResolver(), Settings.System.NEXT_ALARM_FORMATTED);
     }
 
     public List<? extends NameValuePair> getNameValuePairs() {
@@ -62,5 +56,16 @@ public class InputModel {
         nameValuePairs.add(new BasicNameValuePair("onCall", onCall + ""));
         nameValuePairs.add(new BasicNameValuePair("nextAlarm", nextAlarm + ""));
         return nameValuePairs;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getName() + ":\n");
+        sb.append("accelerometer: ").append(accelerometer).append("\n");
+        sb.append("silent: ").append(silent).append("\n");
+        sb.append("onCall: ").append(onCall).append("\n");
+        sb.append("nextAlarm: \"").append(nextAlarm).append("\"\n");
+        return sb.toString();
     }
 }

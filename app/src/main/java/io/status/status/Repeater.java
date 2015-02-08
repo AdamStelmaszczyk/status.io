@@ -46,6 +46,7 @@ public class Repeater extends IntentService {
         }
 
         InputModel inputModel = new InputModel(context);
+        Log.d("test", inputModel.toString());
         new PostTask(inputModel).execute(BASE_URL + "post/" + userId);
 
         // schedule next

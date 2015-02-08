@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onDestroy() {
         super.onPause();
 
         Repeater.stop(this);
