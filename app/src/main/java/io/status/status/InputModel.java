@@ -1,5 +1,11 @@
 package io.status.status;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Adam Stelmaszczyk
  */
@@ -17,4 +23,12 @@ public class InputModel {
         this.nextAlarm = nextAlarm;
     }
 
+    public List<? extends NameValuePair> getNameValuePairs() {
+        List<NameValuePair> nameValuePairs = new ArrayList<>();
+        nameValuePairs.add(new BasicNameValuePair("accelerometer", accelerometer + ""));
+        nameValuePairs.add(new BasicNameValuePair("silent", silent + ""));
+        nameValuePairs.add(new BasicNameValuePair("onCall", onCall + ""));
+        nameValuePairs.add(new BasicNameValuePair("nextAlarm", nextAlarm + ""));
+        return nameValuePairs;
+    }
 }

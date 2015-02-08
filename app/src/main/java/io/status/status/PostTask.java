@@ -32,10 +32,7 @@ public class PostTask extends AsyncTask<String, Void, String> {
         HttpPost request = new HttpPost(urls[0]);
         HttpResponse response;
         try {
-            List<NameValuePair> nameValuePairs = new ArrayList<>();
-            nameValuePairs.add(new BasicNameValuePair("accelerometer", inputModel.accelerometer + ""));
-
-            request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            request.setEntity(new UrlEncodedFormEntity(inputModel.getNameValuePairs()));
 
             response = client.execute(request);
         } catch (IOException e) {

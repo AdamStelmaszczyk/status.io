@@ -18,7 +18,7 @@ import java.util.LinkedList;
 public class GetTask extends AsyncTask<String, Void, String> {
     MainActivity caller;
 
-    GetTask(MainActivity caller){
+    GetTask(MainActivity caller) {
         this.caller = caller;
     }
 
@@ -43,11 +43,11 @@ public class GetTask extends AsyncTask<String, Void, String> {
         Gson gson = new Gson();
         User user = gson.fromJson(response, User.class);
 
-        LinkedList<String> users = new LinkedList<String>();
+        LinkedList<String> users = new LinkedList<>();
         for (User u : user.friends) {
             users.push(u.name);
         }
 
-        this.caller.setupList(users);
+        caller.setupList(users);
     }
 }

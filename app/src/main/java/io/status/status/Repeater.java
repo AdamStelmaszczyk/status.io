@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.Log;
 
 /**
@@ -15,11 +16,13 @@ public class Repeater extends IntentService {
 
     static MainActivity mainActivity;
 
+    public static int userId = 1;
     /**
      * Repetition delay in ms.
      */
     private static final int DELAY = 3000;
     private static final int INTENT_REQUEST_CODE = 666;
+    private static final String BASE_URL = "http://178.62.45.23:5001/";
 
     public Repeater() {
         super("String name");
@@ -35,11 +38,13 @@ public class Repeater extends IntentService {
 
         // do your thing - GET and POST request
         if (mainActivity != null) {
-            new GetTask(mainActivity).execute("http://178.62.45.23/get/3");
+            new GetTask(mainActivity).execute(BASE_URL + "get/" + userId);
         }
 
-        InputModel inputModel = new InputModel(0, 0, 0, "");
-        new PostTask(inputModel).execute("http://178.62.45.23/input/1");
+        String nextAlarm = Settings.System.getString(context.getContentResolver(),
+                Settings.System.NEXT_ALARM_FORMATTED);
+        InputModel inputModel = new InputModel(0, 0, 0, nextAlarm);
+        new PostTask(inputModel).execute(BASE_URL + "post/" + userId);
 
         // schedule next
         getAlarmManager(context).set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + DELAY,
