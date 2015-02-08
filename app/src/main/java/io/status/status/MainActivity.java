@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Adam Stelmaszczyk
@@ -35,5 +34,17 @@ public class MainActivity extends ActionBarActivity {
         listView.setAdapter(userListAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        Repeater.doAfterDelay(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        Repeater.stop(this);
+    }
 }
