@@ -34,7 +34,7 @@ public class Repeater extends IntentService {
         // do your thing - GET and POST request
         new GetTask().execute("http://178.62.45.23/get/1");
 
-        InputModel inputModel = new InputModel(0);
+        InputModel inputModel = new InputModel(0, 0, 0, "");
         new PostTask(inputModel).execute("http://178.62.45.23/input/1");
 
         // schedule next
