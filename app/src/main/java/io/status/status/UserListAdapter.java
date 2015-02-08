@@ -15,7 +15,7 @@ import io.status.status.model.UserModel;
 /**
  * Created by hirish on 2/8/15.
  */
-public class UserListAdapter extends ArrayAdapter {
+public class UserListAdapter extends ArrayAdapter<UserModel> {
     private final Context context;
     private final ArrayList<UserModel> users;
 
